@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capra Capital — Holding Financiera</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #0b1d3a;
+      --gold: #c9a84c;
+      --light: #f4f1ec;
+      --white: #ffffff;
+      --gray: #6b7280;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: var(--navy);
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(11, 29, 58, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, #142850 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-content { max-width: 800px; position: relative; z-index: 1; }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--white);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 strong {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .hero p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-divider {
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin: 0 auto;
+    }
+
+    section { padding: 6rem 2rem; }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      font-weight: 300;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title h2 strong { font-weight: 700; }
+
+    .section-title .bar {
+      width: 50px;
+      height: 3px;
+      background: var(--gold);
+      margin: 0 auto;
+    }
+
+    .about { background: var(--white); }
+
+    .about-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-img {
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, #1a3a5c, #0b1d3a);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .about-img svg { width: 60%; opacity: 0.15; }
+
+    .about-text p {
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .stat h3 {
+      font-size: 2rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .stat span {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sectors { background: var(--light); }
+
+    .sectors-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .sector-card {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .sector-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .sector-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 1.5rem;
+      background: linear-gradient(135deg, var(--navy), #1a3a5c);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sector-icon svg {
+      width: 32px;
+      height: 32px;
+      fill: var(--gold);
+    }
+
+    .sector-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .sector-card p {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    .vision {
+      background: linear-gradient(135deg, var(--navy), #142850);
+      color: var(--white);
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+
+    .vision blockquote {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.6rem;
+      font-weight: 300;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .vision .bar {
+      width: 50px;
+      height: 3px;
+      background: var(--gold);
+      margin: 2rem auto 0;
+    }
+
+    footer {
+      background: #060f1f;
+      color: rgba(255, 255, 255, 0.5);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.9rem;
+    }
+
+    footer .logo-footer {
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img { height: 250px; }
+      .nav-links { display: none; }
+      .stat-row { gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Capra Capital</div>
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#sectores">Sectores</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <h1>Inversiones estratégicas para un <strong>futuro sólido</strong></h1>
+      <p>Somos una empresa holding financiera con presencia en múltiples sectores de la economía. Generamos valor sostenible a largo plazo.</p>
+      <div class="hero-divider"></div>
+    </div>
+  </section>
+
+  <section class="about" id="nosotros">
+    <div class="section-title">
+      <h2>Quiénes <strong>Somos</strong></h2>
+      <div class="bar"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-img">
+        <svg viewBox="0 0 200 200" fill="white">
+          <rect x="30" y="60" width="40" height="120" rx="2"/>
+          <rect x="80" y="30" width="45" height="150" rx="2"/>
+          <rect x="135" y="80" width="35" height="100" rx="2"/>
+          <rect x="38" y="70" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="52" y="70" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="38" y="85" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="52" y="85" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="38" y="100" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="52" y="100" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="90" y="42" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="107" y="42" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="90" y="57" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="107" y="57" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="90" y="72" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="107" y="72" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="90" y="87" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="107" y="87" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="143" y="95" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="155" y="95" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="143" y="110" width="8" height="8" rx="1" fill="#0b1d3a"/>
+          <rect x="155" y="110" width="8" height="8" rx="1" fill="#0b1d3a"/>
+        </svg>
+      </div>
+      <div class="about-text">
+        <p><strong>Capra Capital</strong> es una empresa holding financiera dedicada a la inversión estratégica en múltiples sectores de la economía. Nuestra misión es identificar oportunidades de alto potencial y construir un portafolio diversificado que genere valor sostenible.</p>
+        <p>Con un enfoque disciplinado y una visión a largo plazo, gestionamos inversiones en industrias clave como energía, servicios de lavandería, bienes raíces y más. Creemos en el crecimiento responsable y en la creación de sinergias entre nuestras empresas.</p>
+        <div class="stat-row">
+          <div class="stat">
+            <h3>5+</h3>
+            <span>Sectores</span>
+          </div>
+          <div class="stat">
+            <h3>10+</h3>
+            <span>Empresas</span>
+          </div>
+          <div class="stat">
+            <h3>15+</h3>
+            <span>Años</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectors" id="sectores">
+    <div class="section-title">
+      <h2>Nuestros <strong>Sectores</strong></h2>
+      <div class="bar"></div>
+    </div>
+    <div class="sectors-grid">
+      <div class="sector-card">
+        <div class="sector-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>Energía</h3>
+        <p>Inversiones en generación, distribución y comercialización de energía con enfoque en sostenibilidad y eficiencia operativa.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 16c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm3-5c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zM8 5h2v2H8z"/></svg>
+        </div>
+        <h3>Lavanderías</h3>
+        <p>Red de lavanderías industriales y comerciales que ofrecen servicios de alta calidad a clientes residenciales y corporativos.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">
+          <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        </div>
+        <h3>Bienes Raíces</h3>
+        <p>Desarrollo y gestión de activos inmobiliarios comerciales y residenciales en ubicaciones estratégicas de alto crecimiento.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        </div>
+        <h3>Servicios</h3>
+        <p>Empresas de servicios diversificados que complementan nuestro portafolio y generan sinergias entre los distintos sectores.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="vision">
+    <blockquote>"Construimos valor a largo plazo mediante inversiones inteligentes y una gestión disciplinada en sectores estratégicos de la economía."</blockquote>
+    <div class="bar"></div>
+  </section>
+
+  <footer>
+    <div class="logo-footer">CAPRA CAPITAL</div>
+    <p>&copy; 2026 Capra Capital. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>
